@@ -29,19 +29,18 @@ jobs:
       # spotify-sdkのインストール
       # - name: Install spotify-sdk
       #   run: flutter pub add spotify_sdk
-      '''
-      Run flutter pub add spotify_sdk
-        flutter pub add spotify_sdk
-        shell: /usr/bin/bash -e ***0***
-      Downloading package sky_engine...                                  376ms
-      Downloading flutter_patched_sdk tools...                           512ms
-      Downloading flutter_patched_sdk_product tools...                   300ms
-      Downloading linux-x64 tools...                                   1,246ms
-      Downloading linux-x64/font-subset tools...                         189ms
-      "spotify_sdk" is already in "dependencies". Use "pub upgrade spotify_sdk" to upgrade to a later version!
-        pub finished with exit code 65
-      Error: Process completed with exit code 65.
-      '''
+
+#      Run flutter pub add spotify_sdk
+#        flutter pub add spotify_sdk
+#        shell: /usr/bin/bash -e ***0***
+#      Downloading package sky_engine...                                  376ms
+#      Downloading flutter_patched_sdk tools...                           512ms
+#      Downloading flutter_patched_sdk_product tools...                   300ms
+#      Downloading linux-x64 tools...                                   1,246ms
+#      Downloading linux-x64/font-subset tools...                         189ms
+#      "spotify_sdk" is already in "dependencies". Use "pub upgrade spotify_sdk" to upgrade to a later version!
+#        pub finished with exit code 65
+#      Error: Process completed with exit code 65.
 
       # パッケージのダウンロード
       - name: Download Flutter packages
