@@ -83,10 +83,10 @@ class _HomeState extends State<Home> {
                   onPressed: getAuthenticationToken,
                   child: const Text('get auth token '),
                 ),
-                // TextButton(
-                //   onPressed: getTokenTry,
-                //   child: const Text('get token try '),
-                // ),
+                TextButton(
+                  onPressed: getTokenLocal,
+                  child: const Text('get token try '),
+                ),
               ],
             ),
             const Divider(),
@@ -392,7 +392,28 @@ class _HomeState extends State<Home> {
     try {
       var authenticationToken = await SpotifySdk.getAuthenticationToken(
           clientId: env['CLIENT_ID'].toString(),
-          redirectUrl: "http://localhost:54590/api/auth/authorize.html",
+          redirectUrl: "https://spotify-sdk-sample-try.web.app/api/auth/authorize.html",
+          // redirectUrl: env['REDIRECT_URL'].toString(),
+          scope: 'app-remote-control, '
+              'user-modify-playback-state, '
+              'playlist-read-private, '
+              'playlist-modify-public,user-read-currently-playing');
+      setStatus('Got a token: $authenticationToken');
+      return authenticationToken;
+    } on PlatformException catch (e) {
+      setStatus(e.code, message: e.message);
+      return Future.error('$e.code: $e.message');
+    } on MissingPluginException {
+      setStatus('not implemented');
+      return Future.error('not implemented');
+    }
+  }
+
+  Future<String> getTokenLocal() async {
+    try {
+      var authenticationToken = await SpotifySdk.getAuthenticationToken(
+          clientId: env['CLIENT_ID'].toString(),
+          redirectUrl: "http://localhost:64190/api/auth/authorize.html",
           // redirectUrl: env['REDIRECT_URL'].toString(),
           scope: 'app-remote-control, '
               'user-modify-playback-state, '

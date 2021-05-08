@@ -22,7 +22,13 @@ jobs:
 
       # betaチャンネルに変更
       - name: Change channel
-        run: flutter channel beta
+        run: |
+          flutter channel beta
+          flutter upgrade
+
+      # spotify-sdkのインストール
+      - name: Install spotify-sdk
+        run: flutter pub add spotify_sdk
 
       # パッケージのダウンロード
       - name: Download Flutter packages

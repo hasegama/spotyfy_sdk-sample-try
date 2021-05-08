@@ -7,7 +7,12 @@
 <p>Please wait while we authenticate Spotify...</p>
 <script type="text/javascript">
 		if(window.opener) {
-			window.opener.postMessage('?' + window.location.href.split('?')[1], "*");
+<!--            ↓で行ける-->
+<!--			window.opener.postMessage('?' + window.location.href.split('?')[1], "http://localhost:64190/");-->
+			window.opener.postMessage('?' + window.location.href.split('?')[1], "https://spotify-sdk-sample-try.web.app/");
+
+
+<!--			window.opener.postMessage('?' + window.location.href.split('?')[1], "*");-->
 		} else {
 			window.close();
 		}
