@@ -10,7 +10,6 @@ dependencies:
     sdk: flutter
   logger: ^1.0.0
   # flutter_dotenv: ^4.0.0-nullsafety.0
-  flutter_dotenv: 3.1.0
   cupertino_icons: ^1.0.0
   spotify_sdk: ^2.1.0
 
@@ -32,8 +31,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - .env
+  # assets:
+  #   - .env
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

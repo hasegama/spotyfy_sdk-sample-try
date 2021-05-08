@@ -3,7 +3,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+// import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:logger/logger.dart';
 import 'package:spotify_sdk/models/connection_status.dart';
 import 'package:spotify_sdk/models/crossfade_state.dart';
@@ -14,9 +14,15 @@ import 'package:spotify_sdk/spotify_sdk.dart';
 
 import 'widgets/sized_icon_button.dart';
 
+const String CLIENT_ID="d5b8b20e472749048250d269983533d2";
+const String REDIRECT_URL="https://spotify-sdk-sample-try.web.app";
+const String REDIRECT_URL_LOCAL="http://localhost:64190";
+const String PATH_AUTH="/api/auth/authorize.html";
+const String REDIRECT_URL_AUTH=REDIRECT_URL+PATH_AUTH;
+const String REDIRECT_URL_LOCAL_AUTH=REDIRECT_URL_LOCAL+PATH_AUTH;
+
 Future<void> main() async {
-  await load(fileName: '.env');
-  var redirectUrl = env['REDIRECT_URL'].toString();
+  // await load(fileName: '.env');
   runApp(Home());
 }
 
@@ -75,10 +81,10 @@ class _HomeState extends State<Home> {
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                // TextButton(
-                //   onPressed: connectToSpotifyRemote,
-                //   child: const Icon(Icons.settings_remote),
-                // ),
+                TextButton(
+                  onPressed: connectToSpotifyRemote,
+                  child: const Icon(Icons.settings_remote),
+                ),
                 TextButton(
                   onPressed: getAuthenticationToken,
                   child: const Text('get auth token '),
@@ -366,9 +372,9 @@ class _HomeState extends State<Home> {
         _loading = true;
       });
       var result = await SpotifySdk.connectToSpotifyRemote(
-          clientId: env['CLIENT_ID'].toString(),
-          redirectUrl: "http://localhost:55709/api/auth/authorize.html");
-          // env['REDIRECT_URL'].toString(),
+          clientId: CLIENT_ID, //env['CLIENT_ID'].toString(),
+          redirectUrl: REDIRECT_URL_LOCAL_AUTH);
+          // redirectUrl: env['REDIRECT_URL'].toString()),
       setStatus(result
           ? 'connect to spotify successful'
           : 'connect to spotify failed');
@@ -391,9 +397,8 @@ class _HomeState extends State<Home> {
   Future<String> getAuthenticationToken() async {
     try {
       var authenticationToken = await SpotifySdk.getAuthenticationToken(
-          clientId: env['CLIENT_ID'].toString(),
-          redirectUrl: "https://spotify-sdk-sample-try.web.app/api/auth/authorize.html",
-          // redirectUrl: env['REDIRECT_URL'].toString(),
+          clientId: CLIENT_ID,// env['CLIENT_ID'].toString(),
+          redirectUrl: REDIRECT_URL_AUTH,// redirectUrl: env['REDIRECT_URL'].toString(),
           scope: 'app-remote-control, '
               'user-modify-playback-state, '
               'playlist-read-private, '
@@ -412,8 +417,8 @@ class _HomeState extends State<Home> {
   Future<String> getTokenLocal() async {
     try {
       var authenticationToken = await SpotifySdk.getAuthenticationToken(
-          clientId: env['CLIENT_ID'].toString(),
-          redirectUrl: "http://localhost:64190/api/auth/authorize.html",
+          clientId: CLIENT_ID,// ['CLIENT_ID'].toString(),
+          redirectUrl: REDIRECT_URL_LOCAL_AUTH,
           // redirectUrl: env['REDIRECT_URL'].toString(),
           scope: 'app-remote-control, '
               'user-modify-playback-state, '
